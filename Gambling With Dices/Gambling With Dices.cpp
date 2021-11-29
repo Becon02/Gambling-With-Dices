@@ -14,6 +14,8 @@ void SpaceLine();
 void ExplainingRules();
 void Gambling(int x, int y, int z);
 void TimeDelay(int time);
+void Color(int typeColor);
+void YesNoColored();
 
 int main()
 {
@@ -37,13 +39,7 @@ int main()
         TimeDelay(100);
 
         cout << "\nDo you want to play again ? ";
-        SetConsoleTextAttribute(color, 10);
-        cout << "Yes";
-        SetConsoleTextAttribute(color, 7);
-        cout << "/";
-        SetConsoleTextAttribute(color, 4);
-        cout << "No" << endl;
-        SetConsoleTextAttribute(color, 7);
+        YesNoColored();
 
         cin >> Answer;
 
@@ -75,7 +71,6 @@ void SpaceLine()
 
 void ExplainingRules()
 {
-    HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
     SpaceLine();
 
     bool understandRules = false;
@@ -90,9 +85,12 @@ void ExplainingRules()
         TimeDelay(50);
 
         cout << "In order to hit the "; 
-        SetConsoleTextAttribute(color, 10);
+        
+        //Color for JackPot
+        Color(10);
         cout << "JackPot";
-        SetConsoleTextAttribute(color, 7);
+        Color(7);
+
         cout << " you need to get in all the rolls the same number." << endl;
         TimeDelay(50);
 
@@ -103,13 +101,8 @@ void ExplainingRules()
         TimeDelay(100);
 
         cout << "\nDo you understand the rules ? ";
-        SetConsoleTextAttribute(color, 10);
-        cout << "Yes";
-        SetConsoleTextAttribute(color, 7);
-        cout << "/";
-        SetConsoleTextAttribute(color, 4);
-        cout << "No" << endl;
-        SetConsoleTextAttribute(color, 7);
+        YesNoColored();
+
         cin >> Answer;
 
         if (Answer == "Yes")
@@ -168,18 +161,21 @@ void Gambling(int x, int y, int z)
     if (x == y && x == z)
     {
         SpaceLine();
-        SetConsoleTextAttribute(color, 10);
-        cout << "JackPot !!" << endl;
-        SetConsoleTextAttribute(color, 7);
+        
+        Color(10);
+        cout << "\nJackPot !!" << endl;
+        Color(7);
+
         SpaceLine();
         exit(0);
     }
     else
     {
         SpaceLine();
-        SetConsoleTextAttribute(color, 4);
+       
+        Color(4);
         cout << "\nGood luck next time." << endl;
-        SetConsoleTextAttribute(color, 7);
+        Color(7);
     }
 
     SpaceLine();
@@ -189,4 +185,24 @@ void TimeDelay(int time)
 {
     sleep_for(nanoseconds(time));
     sleep_until(system_clock::now() + seconds(1));
+}
+
+void Color(int typeColor)
+{
+    HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(color, typeColor);
+}
+
+void YesNoColored()
+{
+    Color(10);
+
+    cout << "Yes";
+    Color(7);
+
+    cout << "/";
+    Color(4);
+
+    cout << "No" << endl;
+    Color(7);
 }
