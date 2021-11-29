@@ -25,6 +25,7 @@ int main()
     srand(time(NULL));
 
     bool Playing = true;
+    bool CorrectAnswer = false;
     string Answer;
 
     ExplainingRules();
@@ -34,32 +35,36 @@ int main()
     while (Playing == true)
     {
         
-        Gambling(rand() % 3 + 1, rand() % 3 + 1, rand() % 3 + 1);
+        Gambling(rand() % 6 + 1, rand() % 6 + 1, rand() % 6 + 1);
         
         TimeDelay(100);
 
-        cout << "\nDo you want to play again ? ";
-        YesNoColored();
-
-        cin >> Answer;
-
-        if (Answer == "Yes")
+        while (CorrectAnswer == false)
         {
-            Playing = true;
-        }   
-        else if (Answer == "No")
-        {
-            cout << "See you next time!" << endl;
-            Playing = false;
+            cout << "\nDo you want to play again ? ";
+            YesNoColored();
 
-            SpaceLine();
+            cin >> Answer;
+
+            if (Answer == "Yes")
+            {
+                CorrectAnswer = true;
+                Playing = true;
+            }
+            else if (Answer == "No")
+            {
+                cout << "See you next time!" << endl;
+                Playing = false;
+                CorrectAnswer = true;
+                SpaceLine();
+            }
+            else
+            {
+                CorrectAnswer = false;
+                cout << "Make sure you type it correctly." << endl;
+                SpaceLine();
+            }
         }
-        else
-        {
-            cout << "Make sure you type it correctly." << endl;
-            SpaceLine();
-        }
-
     }
 
 }
@@ -165,9 +170,6 @@ void Gambling(int x, int y, int z)
         Color(10);
         cout << "\nJackPot !!" << endl;
         Color(7);
-
-        SpaceLine();
-        exit(0);
     }
     else
     {
