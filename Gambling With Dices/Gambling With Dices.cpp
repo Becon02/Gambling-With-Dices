@@ -16,6 +16,7 @@ void Gambling(int x, int y, int z);
 void TimeDelay(int time);
 void Color(int typeColor);
 void YesNoColored();
+void MainCode();
 
 int main()
 {
@@ -24,49 +25,7 @@ int main()
     SetConsoleTextAttribute(color, 7);
     srand(time(NULL));
 
-    bool Playing = true;
-    bool CorrectAnswer = false;
-    string Answer;
-
-    ExplainingRules();
-
-    TimeDelay(100);
-    
-    while (Playing == true)
-    {
-        
-        Gambling(rand() % 6 + 1, rand() % 6 + 1, rand() % 6 + 1);
-        
-        TimeDelay(100);
-
-        while (CorrectAnswer == false)
-        {
-            cout << "\nDo you want to play again ? ";
-            YesNoColored();
-
-            cin >> Answer;
-
-            if (Answer == "Yes")
-            {
-                CorrectAnswer = true;
-                Playing = true;
-            }
-            else if (Answer == "No")
-            {
-                cout << "See you next time!" << endl;
-                Playing = false;
-                CorrectAnswer = true;
-                SpaceLine();
-            }
-            else
-            {
-                CorrectAnswer = false;
-                cout << "Make sure you type it correctly." << endl;
-                SpaceLine();
-            }
-        }
-    }
-
+    MainCode();
 }
 
 void SpaceLine()
@@ -207,4 +166,50 @@ void YesNoColored()
 
     cout << "No" << endl;
     Color(7);
+}
+
+void MainCode()
+{
+    bool Playing = true;
+    string Answer;
+
+    ExplainingRules();
+
+    TimeDelay(100);
+
+    while (Playing == true)
+    {
+        bool CorrectAnswer = false;
+
+        Gambling(rand() % 6 + 1, rand() % 6 + 1, rand() % 6 + 1);
+
+        TimeDelay(100);
+
+        while (CorrectAnswer == false)
+        {
+            cout << "\nDo you want to play again ? ";
+            YesNoColored();
+
+            cin >> Answer;
+
+            if (Answer == "Yes")
+            {
+                CorrectAnswer = true;
+                Playing = true;
+            }
+            else if (Answer == "No")
+            {
+                cout << "See you next time!" << endl;
+                Playing = false;
+                CorrectAnswer = true;
+                SpaceLine();
+            }
+            else
+            {
+                CorrectAnswer = false;
+                cout << "Make sure you type it correctly." << endl;
+                SpaceLine();
+            }
+        }
+    }
 }
