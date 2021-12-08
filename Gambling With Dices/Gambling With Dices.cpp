@@ -30,7 +30,7 @@ int main()
 
 void SpaceLine()
 {
-    cout << "---------------------------------------------------------------";
+    cout << "---------------------------------------------------------------\n";
 }
 
 void ExplainingRules()
@@ -39,12 +39,15 @@ void ExplainingRules()
 
     bool understandRules = false;
     string Answer;
+    bool TypeCorrectly;
     
-    cout << "\nWelcome player to the gambling game.\n" << endl;
+    cout << "Welcome player to the gambling game.\n" << endl;
 
     TimeDelay(10);
     while (understandRules == false)
     {
+        TypeCorrectly = false;
+
         cout << "We will roll a dice of 6 a number of 3 times." << endl;
         TimeDelay(50);
 
@@ -63,26 +66,36 @@ void ExplainingRules()
         SpaceLine();
         
         TimeDelay(100);
-
-        cout << "\nDo you understand the rules ? ";
-        YesNoColored();
-
-        cin >> Answer;
-
-        if (Answer == "Yes")
+        
+        while (TypeCorrectly == false)
         {
-            cout << "Perfect then lets start playing !!" << endl;
-            understandRules = true;
-        }
-        else if (Answer == "No")
-        {
-            SpaceLine();
-            understandRules = false;
-        }
-        else
-        {
-            cout << "Make sure you type it correctly." << endl;
-            SpaceLine();
+            cout << "Do you understand the rules ? ";
+            YesNoColored();
+
+            cin >> Answer;
+
+            if (Answer == "Yes")
+            {
+                system("CLS");
+
+                SpaceLine();
+
+                cout << "Perfect then lets start playing !!" << endl;
+                understandRules = true;
+                TypeCorrectly = true;
+            }
+            else if (Answer == "No")
+            {
+                SpaceLine();
+                understandRules = false;
+                TypeCorrectly = true;
+            }
+            else
+            {
+                system("CLS");
+                cout << "Make sure you type it correctly." << endl;
+                SpaceLine();
+            }
         }
     }
 
@@ -102,7 +115,7 @@ void Gambling(int x, int y, int z)
         {
         case 0:
         {
-            cout << "\nRoll " << i + 1 << " is: " << x << endl;
+            cout << "Roll " << i + 1 << " is: " << x << endl;
             break;
         }
         case 1:
@@ -127,7 +140,7 @@ void Gambling(int x, int y, int z)
         SpaceLine();
         
         Color(10);
-        cout << "\nJackPot !!" << endl;
+        cout << "JackPot !!" << endl;
         Color(7);
     }
     else
@@ -135,7 +148,7 @@ void Gambling(int x, int y, int z)
         SpaceLine();
        
         Color(4);
-        cout << "\nGood luck next time." << endl;
+        cout << "Good luck next time." << endl;
         Color(7);
     }
 
@@ -187,15 +200,19 @@ void MainCode()
 
         while (CorrectAnswer == false)
         {
-            cout << "\nDo you want to play again ? ";
+            cout << "Do you want to play again ? ";
             YesNoColored();
 
             cin >> Answer;
 
             if (Answer == "Yes")
             {
+                system("CLS");
+
                 CorrectAnswer = true;
                 Playing = true;
+
+                SpaceLine();
             }
             else if (Answer == "No")
             {
